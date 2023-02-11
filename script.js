@@ -39,6 +39,11 @@ function inputFunc(e) {
         console.log("numberOfSquareRow = " + numberOfSquaresRow + " typeof = " + typeof(numberOfSquaresRow));
         numberOfSquares = numberOfSquaresRow* numberOfSquaresRow;
         addBox(sketchPad, numberOfSquares);
+        note = document.createElement("div");
+        textNode = document.createTextNode("refresh the page to change the number of boxes");
+        note.appendChild(textNode);
+        note.style.color = "red";
+        body.appendChild(note);
         e.target.removeEventListener(e.type,inputFunc);
     }
 }
