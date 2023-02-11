@@ -1,7 +1,17 @@
 // centering the box
 const body = document.querySelector("body");
 body.style.display = "flex";
-body.style.justifyContent = "center";
+body.style.flexDirection = "column";
+body.style.alignItems = "center";
+
+//input bar
+const header = document.querySelector("#heading");
+header.style.display = "flex";
+header.style.justifyContent = "space-around";
+header.style.gap ="15px"
+const inputBar = document.querySelector("#inputBar");
+
+inputBar.addEventListener("keyup", inputFunc);
 
 const sketchPad = document.querySelector("#container");
 
@@ -14,10 +24,28 @@ sketchPad.style.borderColor = "black";
 sketchPad.style.borderStyle = "solid";
 //sketchPad.setAttribute("style", "display:flex;flex-wrap:wrap");
 
+function inputFunc(e) {
+    removeEvent = false;
+    if(e.keyCode == 13){
+        numberOfSquaresRow = e.target.value - 0;
+        console.log(isNaN(numberOfSquaresRow));
+        if(isNaN(numberOfSquaresRow)){
+           alert("input should be an integer")
+           return;
+        }
+        if(numberOfSquaresRow > 100){
+            alert("will result in loading issue please use a number smaller");
+        }
+        console.log("numberOfSquareRow = " + numberOfSquaresRow + " typeof = " + typeof(numberOfSquaresRow));
+        numberOfSquares = numberOfSquaresRow* numberOfSquaresRow;
+        addBox(sketchPad, numberOfSquares);
+        e.target.removeEventListener(e.type,inputFunc);
+    }
+}
 
-numberOfSquares = 64;
+//numberOfSquares = 64;
 
-addBox(sketchPad, numberOfSquares);
+
 
 function addBox(sketchPad, numberOfSquares){
     
@@ -42,12 +70,12 @@ function addBox(sketchPad, numberOfSquares){
 
 function colorIt(e) {
     boxID = "#" + e.target.id;
-    console.log(boxID);
+    //console.log(boxID);
     box = document.querySelector(boxID);
-    console.log(box.style.backgroundColor);
+    //console.log(box.style.backgroundColor);
     rgb2num(box.style.backgroundColor);
     boxColor = rgb2num(box.style.backgroundColor);
-    console.log(boxColor);
+    //console.log(boxColor);
     boxRed = boxColor[1];
     boxGreen = boxColor[2];
     boxBlue = boxColor[3];
